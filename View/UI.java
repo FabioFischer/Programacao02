@@ -48,6 +48,11 @@ public class UI extends javax.swing.JFrame {
         jTFCPFCadastro.setText("");
         jTFRGCadastro.setText("");
         jTFEmail.setText("");
+        
+        jTFNomePesquisa.setText("");
+        jTFCPFPesquisa.setText("");
+        jTFRGPesquisa.setText("");
+        jTFEmailPesquisa.setText("");
     }
 
     public void habilitaCampos(JTextField jTA) {
@@ -408,6 +413,7 @@ public class UI extends javax.swing.JFrame {
         try {
             controlador.excluirDados();
             jCBPessoas.removeAllItems();
+            limpaCampos();
             jTAConsole.setText("Registro excluido com sucesso!");
         } catch (IOException ex) {
             jTAConsole.setText("Não existem registros!");
@@ -424,12 +430,13 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jBAlteraActionPerformed
 
     private void jCBPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPessoasActionPerformed
-        Pessoa p = controlador.selecionaPessoaCB(jCBPessoas);
-        nome = p.getNome();
-        cpf = p.getCpf();
-        email = p.getEmail();
-        rg = p.getRg();
-
+        if (!jCBPessoas.getSelectedItem().equals(null)) {
+            Pessoa p = controlador.selecionaPessoaCB(jCBPessoas);
+            nome = p.getNome();
+            cpf = p.getCpf();
+            email = p.getEmail();
+            rg = p.getRg();
+        }
         try {
             jTFNomePesquisa.setText(nome);
             jTFCPFPesquisa.setText(cpf);
