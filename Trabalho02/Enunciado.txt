@@ -1,0 +1,10 @@
+
+
+Criar um programa que permite gravar, apagar, alterar e buscar os dados de pessoas
+armazenados em um arquivo.
+Os dados devem ser gravados/lidos no arquivo como objetos (registros).
+Para cada pessoa é necessário ter os seguintes dados: CPF, nome, RG e email.
+O programa deve ser implementado usando-se o padrão Model-View-Controller (MVC).
+Arquivos .java do programa;
+Modelo de classes (imagem);
+Modelo de sequência da funcionalidade de gravar pessoa (imagem).
