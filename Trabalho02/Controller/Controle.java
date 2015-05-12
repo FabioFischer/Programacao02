@@ -73,6 +73,9 @@ public class Controle {
     }
 
     public void deletaPessoaCB(JComboBox jCB, Pessoa p) {
+        if(p == null || p.equals(null)){
+            throw new IllegalArgumentException("Ação inválida!");
+        }
         jCB.removeItem(p);
     }
 
@@ -90,6 +93,9 @@ public class Controle {
     }
 
     public void excluiPessoa(String cpf) {
+        if(pessoas.get(cpf) == null || pessoas.get(cpf).equals(null)){
+            throw new IllegalArgumentException("Ação inválida!");
+        }
         pessoas.remove(cpf);
     }
 
