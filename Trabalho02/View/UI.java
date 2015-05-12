@@ -9,8 +9,6 @@ import Controller.Controle;
 import Model.Pessoa;
 import java.awt.Color;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTextField;
 
 /**
@@ -379,8 +377,9 @@ public class UI extends javax.swing.JFrame {
         try {
             controlador.criaPessoa(nome, cpf, rg, email);
             jCBPessoas.addItem(controlador.getPessoa(cpf));
+            controlador.salvarPessoas();
 
-            jTAConsole.setText("Pessoa " + nome + " criado OK, com CPF "
+            jTAConsole.setText("Pessoa " + nome + " registrada, com CPF "
                     + cpf);
         } catch (NumberFormatException nFE) {
             jTAConsole.setText("Não foi possível concluir o cadastro! Tipo inválido de informação!");
@@ -388,7 +387,10 @@ public class UI extends javax.swing.JFrame {
             jTAConsole.setText("Não foi possível concluir o cadastro! Informações pendentes!");
         } catch (IllegalArgumentException iAE) {
             jTAConsole.setText(iAE.getMessage());
+        } catch (IOException ex) {
+            jTAConsole.setText("Não foi possível salvar os dados no arquivo!");
         }
+
 
         limpaCampos();
 
@@ -399,15 +401,6 @@ public class UI extends javax.swing.JFrame {
 
         jTAConsole.setText(str);
     }//GEN-LAST:event_jBExibeRegistroActionPerformed
-
-    private void jBSalvaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvaActionPerformed
-        try {
-            controlador.salvarPessoas();
-            jTAConsole.setText("Dados salvos com sucesso!");
-        } catch (IOException ioe) {
-            jTAConsole.setText("Não foi possível salvar os dados no arquivo!");
-        }
-    }//GEN-LAST:event_jBSalvaActionPerformed
 
     private void jBExcluiRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluiRegistroActionPerformed
         try {
@@ -459,6 +452,7 @@ public class UI extends javax.swing.JFrame {
                     Integer.parseInt(jTFRGPesquisa.getText()),
                     jTFEmailPesquisa.getText());
             controlador.salvarPessoas();
+            jTAConsole.setText(p.getNome() + " alterado com sucesso!");
             
         } catch (IllegalArgumentException iAE) {
             jTAConsole.setText(iAE.getMessage());
@@ -481,7 +475,9 @@ public class UI extends javax.swing.JFrame {
             controlador.salvarPessoas();
             jTAConsole.setText("Pessoa excluida com sucesso!");
         } catch (IOException ioe) {
-            jTAConsole.setText("Não foi possível realizar a tarefa!!");
+            jTAConsole.setText("Não foi possível realizar a tarefa!");
+        } catch (IllegalArgumentException iAE){
+            jTAConsole.setText(iAE.getMessage());
         }
     }//GEN-LAST:event_jBExcluiPessoaActionPerformed
 
