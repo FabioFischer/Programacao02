@@ -9,6 +9,7 @@ import Controller.Controle;
 import Model.Pessoa;
 import java.awt.Color;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -24,6 +25,8 @@ public class UI extends javax.swing.JFrame {
 
     private String cpf, nome, email;
     private Integer rg;
+    
+    private final String[] opcoesAviso = {"Sim", "Não"};
 
     public UI() {
         setLocation(400, 50);
@@ -61,6 +64,11 @@ public class UI extends javax.swing.JFrame {
     public void desabilitaCampos(JTextField jTA) {
         jTA.setEditable(false);
         jTA.setBackground(new java.awt.Color(210, 210, 210));
+    }
+    
+    private int criaAviso(String message, String[] options) {
+        return JOptionPane.showOptionDialog(this, message, "Registro de Pessoas", 0, JOptionPane.WARNING_MESSAGE, null, options,
+                options[0]);
     }
 
     /**
@@ -403,13 +411,17 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jBExibeRegistroActionPerformed
 
     private void jBExcluiRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluiRegistroActionPerformed
-        try {
-            controlador.excluirDados();
-            jCBPessoas.removeAllItems();
-            limpaCampos();
-            jTAConsole.setText("Registro excluido com sucesso!");
-        } catch (IOException ex) {
-            jTAConsole.setText("Não existem registros!");
+        int resposta = criaAviso("Deseja realmente excluir todos os registros?", opcoesAviso);
+        
+        if(resposta == 0){
+            try {
+                controlador.excluirDados();
+                jCBPessoas.removeAllItems();
+                limpaCampos();
+                jTAConsole.setText("Registro excluido com sucesso!");
+            } catch (IOException ex) {
+                jTAConsole.setText("Não existem registros!");
+            }
         }
     }//GEN-LAST:event_jBExcluiRegistroActionPerformed
 
@@ -423,21 +435,24 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jBAlteraActionPerformed
 
     private void jCBPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPessoasActionPerformed
-        if (!jCBPessoas.getSelectedItem().equals(null)) {
+        Pessoa p = controlador.selecionaPessoaCB(jCBPessoas);
+       
+        if (p != null) {
             Pessoa p = controlador.selecionaPessoaCB(jCBPessoas);
             nome = p.getNome();
             cpf = p.getCpf();
             email = p.getEmail();
             rg = p.getRg();
-        }
-        try {
-            jTFNomePesquisa.setText(nome);
-            jTFCPFPesquisa.setText(cpf);
-            jTFRGPesquisa.setText(rg.toString());
-            jTFEmailPesquisa.setText(email);
-
-        } catch (IllegalArgumentException iAE) {
-            jTAConsole.setText(iAE.getMessage());
+        
+            try {
+                jTFNomePesquisa.setText(nome);
+                jTFCPFPesquisa.setText(cpf);
+                jTFRGPesquisa.setText(rg.toString());
+                jTFEmailPesquisa.setText(email);
+    
+            } catch (IllegalArgumentException iAE) {
+                jTAConsole.setText(iAE.getMessage());
+            }
         }
         jCBPessoas.setSelectedItem(0);
     }//GEN-LAST:event_jCBPessoasActionPerformed
