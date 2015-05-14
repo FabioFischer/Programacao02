@@ -11,19 +11,11 @@ import javax.swing.JComboBox;
 
 public class Controle {
 
-    public static Controle controlador = null;
     HashMap<String, Pessoa> pessoas;
     Path path = Paths.get("RegDados.ser");
 
-    public static Controle getControle() {
-        if (controlador == null) {
-            controlador = new Controle();
-        }
-        return controlador;
-    }
-
-    private Controle() {
-        pessoas = new HashMap<String, Pessoa>();
+    public Controle() {
+       this.pessoas = new HashMap<String, Pessoa>();
     }
 
     public void criaPessoa(String nome, String cpf, int rg, String email) {
