@@ -377,12 +377,12 @@ public class UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastraActionPerformed
-        nome = jTFNomeCadastro.getText();
-        cpf = jTFCPFCadastro.getText();
-        rg = Integer.parseInt(jTFRGCadastro.getText());
-        email = jTFEmail.getText();
-
         try {
+            nome = jTFNomeCadastro.getText();
+            cpf = jTFCPFCadastro.getText();
+            rg = Integer.parseInt(jTFRGCadastro.getText());
+            email = jTFEmail.getText();
+        
             controlador.criaPessoa(nome, cpf, rg, email);
             jCBPessoas.addItem(controlador.getPessoa(cpf));
             controlador.salvarPessoas();
@@ -399,9 +399,7 @@ public class UI extends javax.swing.JFrame {
             jTAConsole.setText("Não foi possível salvar os dados no arquivo!");
         }
 
-
         limpaCampos();
-
     }//GEN-LAST:event_jBCadastraActionPerformed
 
     private void jBExibeRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExibeRegistroActionPerformed
