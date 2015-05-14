@@ -21,7 +21,7 @@ public class UI extends javax.swing.JFrame {
     /**
      * Creates new form UI
      */
-    private final Controle controlador = Controle.getControle();
+    private final Controle controlador = new Controle();
 
     private String cpf, nome, email;
     private Integer rg;
