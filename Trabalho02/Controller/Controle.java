@@ -1,4 +1,4 @@
-package Controller;
+﻿package Controller;
 
 import Model.Pessoa;
 import java.io.*;
@@ -7,108 +7,92 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashMap;
-import javax.swing.JComboBox;
 
-public class Controle {
+public class Controle implements IControllerPessoas {
 
     HashMap<String, Pessoa> pessoas;
     Path path = Paths.get("RegDados.ser");
 
-    public Controle() {
-       this.pessoas = new HashMap<String, Pessoa>();
+    public Controle() throws IOException, ClassNotFoundException {
+        this.pessoas = new HashMap<>();
+        recuperarDados();
     }
 
-    public void criaPessoa(String nome, String cpf, int rg, String email) {
-        if (pessoas.get(cpf) == null) {
-            pessoas.put(cpf, new Pessoa(nome, cpf, rg, email));
+    @Override
+    public Pessoa incluirPessoa(String nome, String email, String cpf, String rg) throws IOException {
+        Pessoa novaPessoa = new Pessoa(nome, cpf, rg, email);
+
+        boolean pessoaJaExistente = pessoas.get(novaPessoa.getCpf()) == null;
+        if (!pessoaJaExistente) {
+            throw new IllegalArgumentException("Já existe uma pessoa cadastrada com este mesmo CPF");
         }
+
+        pessoas.put(novaPessoa.getCpf(), novaPessoa);
+        salvarPessoas();
+
+        return novaPessoa;
     }
 
-    public Pessoa getPessoa(String cpf) {
-        return pessoas.get(cpf);
-    }
-
-    public Collection<Pessoa> getPessoas() {
-        return pessoas.values();
-    }
-
-    public String imprimePessoa(Pessoa p) {
-        return ("\n------------------------------------------------------------------------"
-                + "\nNome: " + p.getNome()
-                + "\nCPF: " + p.getCpf()
-                + "\nRG: " + p.getRg()
-                + "\nEmail: " + p.getEmail()
-                + "\n------------------------------------------------------------------------");
-    }
-
-    public String imprimePessoas() {
-        String str = "";
-        Collection<Pessoa> p = this.getPessoas();
-
-        for (Pessoa pessoa : p) {
-            str += "\n------------------------------------------------------------------------"
-                    + "\nNome: " + pessoa.getNome()
-                    + "\nCPF: " + pessoa.getCpf()
-                    + "\nRG: " + pessoa.getRg()
-                    + "\nEmail: " + pessoa.getEmail()
-                    + "\n------------------------------------------------------------------------";
+    @Override
+    public Pessoa alterarPessoa(String cpf, Pessoa pessoa) throws IOException {
+        boolean pessoaJaExistente = pessoas.get(cpf) == null;
+        if (pessoaJaExistente) {
+            throw new IllegalArgumentException("Pessoa de CPF " + cpf + " não cadastrada!");
         }
-        return str;
-    }
 
-    public void addPessoaCB(JComboBox jCB) {
-        Collection<Pessoa> p = this.getPessoas();
-
-        for (Pessoa pessoa : p) {
-            jCB.addItem(pessoa);
-        }
-    }
-
-    public void deletaPessoaCB(JComboBox jCB, Pessoa p) {
-        if(p == null || p.equals(null)){
-            throw new IllegalArgumentException("Ação inválida!");
-        }
-        jCB.removeItem(p);
-    }
-
-    public Pessoa selecionaPessoaCB(JComboBox jCB) {
-        return (Pessoa) jCB.getSelectedItem();
-    }
-    
-    public void alteraPessoa(String cpfOriginal, String nome, String cpfFinal, int rg, String email){
-        Pessoa p = pessoas.get(cpfOriginal);
-        
-        p.setNome(nome);
-        p.setCpf(cpfFinal);
-        p.setRg(rg);
-        p.setEmail(email);
-    }
-
-    public void excluiPessoa(String cpf) {
-        if(pessoas.get(cpf) == null || pessoas.get(cpf).equals(null)){
-            throw new IllegalArgumentException("Ação inválida!");
-        }
         pessoas.remove(cpf);
+        salvarPessoas();
+
+        return incluirPessoa(pessoa.getNome(), pessoa.getEmail(), pessoa.getCpf(), pessoa.getRg());
     }
 
-    public void salvarPessoas() throws IOException {
+    @Override
+    public void excluirPessoa(String pessoaCpf) throws IOException {
+        boolean pessoaJaExistente = pessoas.get(pessoaCpf) == null;
+        if (pessoaJaExistente) {
+            throw new IllegalArgumentException("Pessoa de CPF " + pessoaCpf + " não cadastrada!");
+        }
+
+        pessoas.remove(pessoaCpf);
+        salvarPessoas();
+    }
+
+    @Override
+    public Pessoa buscarPorCPF(String cpf) {
+        Pessoa pessoa = pessoas.get(cpf);
+        if (pessoa == null) {
+            throw new IllegalArgumentException("Pessoa de CPF " + cpf + " não cadastrada!");
+        }
+
+        return pessoa;
+    }
+
+    @Override
+    public Collection<Pessoa> getPessoas() {
+        return this.pessoas.values();
+    }
+
+    private void salvarPessoas() throws FileNotFoundException, IOException {
         FileOutputStream fos = new FileOutputStream(this.path.toString());
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(pessoas);
-        oos.close();
+        try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            oos.writeObject(pessoas);
+        }
     }
 
-    public void recuperarPessoas() throws IOException, ClassNotFoundException {
-        ObjectInputStream ois
-                = new ObjectInputStream(
-                        new FileInputStream(this.path.toString()));
+    @Override
+    public void excluirPessoas() throws IOException {
+        Files.deleteIfExists(this.path);
+        pessoas.clear();
+    }
+
+    private void recuperarDados() throws IOException, ClassNotFoundException {
+        if (!Files.exists(path)) {
+            return;
+        }
+
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(this.path.toString()));
         Object objeto = ois.readObject();
         ois.close();
         pessoas = (HashMap<String, Pessoa>) objeto;
-    }
-
-    public void excluirDados() throws IOException {
-        Files.deleteIfExists(this.path);
-        pessoas.clear();
     }
 }
