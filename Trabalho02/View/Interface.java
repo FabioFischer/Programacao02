@@ -16,7 +16,7 @@ import javax.swing.JTextField;
  *
  * @author usuario
  */
-public class UI extends javax.swing.JFrame {
+public class Interface extends javax.swing.JFrame {
 
     /**
      * Creates new form UI
@@ -25,10 +25,10 @@ public class UI extends javax.swing.JFrame {
 
     private String cpf, nome, email;
     private Integer rg;
-    
+
     private final String[] opcoesAviso = {"Sim", "Não"};
 
-    public UI() {
+    public Interface() {
         setLocation(400, 50);
         setTitle("Banco de Pessoas");
         initComponents();
@@ -49,7 +49,7 @@ public class UI extends javax.swing.JFrame {
         jTFCPFCadastro.setText("");
         jTFRGCadastro.setText("");
         jTFEmail.setText("");
-        
+
         jTFNomePesquisa.setText("");
         jTFCPFPesquisa.setText("");
         jTFRGPesquisa.setText("");
@@ -65,10 +65,10 @@ public class UI extends javax.swing.JFrame {
         jTA.setEditable(false);
         jTA.setBackground(new java.awt.Color(210, 210, 210));
     }
-    
-    private int criaAviso(String message, String[] options) {
-        return JOptionPane.showOptionDialog(this, message, "Registro de Pessoas", 0, JOptionPane.WARNING_MESSAGE, null, options,
-                options[0]);
+
+    private int criaAviso(String mensagem, String[] opcoes) {
+        return JOptionPane.showOptionDialog(this, mensagem, "Registro de Pessoas", 0, JOptionPane.WARNING_MESSAGE, null, opcoes,
+                opcoes[0]);
     }
 
     /**
@@ -370,7 +370,7 @@ public class UI extends javax.swing.JFrame {
             cpf = jTFCPFCadastro.getText();
             rg = Integer.parseInt(jTFRGCadastro.getText());
             email = jTFEmail.getText();
-        
+
             controlador.criaPessoa(nome, cpf, rg, email);
             jCBPessoas.addItem(controlador.getPessoa(cpf));
             controlador.salvarPessoas();
@@ -388,6 +388,7 @@ public class UI extends javax.swing.JFrame {
         }
 
         limpaCampos();
+
     }                                          
 
     private void jBExibeRegistroActionPerformed(java.awt.event.ActionEvent evt) {                                                
@@ -398,8 +399,8 @@ public class UI extends javax.swing.JFrame {
 
     private void jBExcluiRegistroActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         int resposta = criaAviso("Deseja realmente excluir todos os registros?", opcoesAviso);
-        
-        if(resposta == 0){
+
+        if (resposta == 0) {
             try {
                 controlador.excluirDados();
                 jCBPessoas.removeAllItems();
@@ -422,20 +423,20 @@ public class UI extends javax.swing.JFrame {
 
     private void jCBPessoasActionPerformed(java.awt.event.ActionEvent evt) {                                           
         Pessoa p = controlador.selecionaPessoaCB(jCBPessoas);
-       
+
         if (p != null) {
-            p = controlador.selecionaPessoaCB(jCBPessoas);
+
             nome = p.getNome();
             cpf = p.getCpf();
             email = p.getEmail();
             rg = p.getRg();
-        
+
             try {
                 jTFNomePesquisa.setText(nome);
                 jTFCPFPesquisa.setText(cpf);
                 jTFRGPesquisa.setText(rg.toString());
                 jTFEmailPesquisa.setText(email);
-    
+
             } catch (IllegalArgumentException iAE) {
                 jTAConsole.setText(iAE.getMessage());
             }
@@ -454,7 +455,7 @@ public class UI extends javax.swing.JFrame {
                     jTFEmailPesquisa.getText());
             controlador.salvarPessoas();
             jTAConsole.setText(p.getNome() + " alterado com sucesso!");
-            
+
         } catch (IllegalArgumentException iAE) {
             jTAConsole.setText(iAE.getMessage());
         } catch (IOException ex) {
@@ -476,8 +477,8 @@ public class UI extends javax.swing.JFrame {
             controlador.salvarPessoas();
             jTAConsole.setText("Pessoa excluida com sucesso!");
         } catch (IOException ioe) {
-            jTAConsole.setText("Não foi possível realizar a tarefa!");
-        } catch (IllegalArgumentException iAE){
+            jTAConsole.setText("Não foi possível realizar a tarefa!!");
+        } catch (IllegalArgumentException iAE) {
             jTAConsole.setText(iAE.getMessage());
         }
     }                                              
@@ -499,13 +500,13 @@ public class UI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -513,7 +514,7 @@ public class UI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new UI().setVisible(true);
+                new Interface().setVisible(true);
             }
         });
     }
