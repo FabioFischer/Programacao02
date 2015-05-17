@@ -436,7 +436,7 @@ public class UI extends javax.swing.JFrame {
         Pessoa p = controlador.selecionaPessoaCB(jCBPessoas);
        
         if (p != null) {
-            Pessoa p = controlador.selecionaPessoaCB(jCBPessoas);
+            p = controlador.selecionaPessoaCB(jCBPessoas);
             nome = p.getNome();
             cpf = p.getCpf();
             email = p.getEmail();
