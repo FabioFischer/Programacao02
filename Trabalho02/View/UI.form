@@ -54,8 +54,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jBExibeRegistro" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jBSalva" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jBExcluiRegistro" min="-2" pref="122" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   </Group>
@@ -71,10 +69,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jBExcluiRegistro" alignment="1" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jBExibeRegistro" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jBSalva" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jBExibeRegistro" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="157" max="-2" attributes="0"/>
@@ -421,14 +416,6 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jBSalva">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Salvar Dados"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSalvaActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="jBExibeRegistro">
       <Properties>
         <Property name="text" type="java.lang.String" value="Exibir Registro"/>
