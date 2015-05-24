@@ -1,4 +1,4 @@
-﻿package Controller;
+package Controller;
 
 import Model.Pessoa;
 import java.io.*;
@@ -65,6 +65,23 @@ public class Controle implements IControllerPessoas {
         }
 
         return pessoa;
+    }
+
+    @Override
+    public Pessoa buscarPorNome(String nome) {
+        Collection<Pessoa> registro = this.getPessoas();
+        boolean achou = false;
+
+        for (Pessoa p : registro) {
+            if (p.getNome().equals(nome)) {
+                achou = true;
+                return p;
+            }
+        }
+        if (!achou) {
+            throw new IllegalArgumentException("Pessoa de nome " + nome + " não cadastrada!");
+        }
+        return null;
     }
 
     @Override

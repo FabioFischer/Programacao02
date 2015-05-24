@@ -14,6 +14,8 @@ public interface IControllerPessoas {
 
     Pessoa buscarPorCPF(String cpf);
 
+    Pessoa buscarPorNome(String nome);
+    
     Collection<Pessoa> getPessoas();
 
     void excluirPessoas() throws IOException;

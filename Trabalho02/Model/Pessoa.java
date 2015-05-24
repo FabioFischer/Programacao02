@@ -1,4 +1,4 @@
-﻿package Model;
+package Model;
 
 public class Pessoa implements java.io.Serializable {
 
