@@ -722,12 +722,9 @@ public class Interface extends javax.swing.JFrame {
 
             if (p == null) {
                 jTAConsole.setText("Pessoa não cadastrada!");
-            } else {
-                jBAltera.setEnabled(true);
             }
             jCBPessoas.setSelectedItem(p);
-            jCBPessoasActionPerformed(null);
-
+            
         } catch (IllegalArgumentException iAE) {
             jTAConsole.setText(iAE.getMessage());
         }
