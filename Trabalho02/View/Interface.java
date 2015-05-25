@@ -727,13 +727,17 @@ public class Interface extends javax.swing.JFrame {
             if (p == null) {
                 jTAConsole.setText("Pessoa não cadastrada!");
             }
+
+            limpaCampos();
+
             jCBPessoas.setSelectedItem(p);
-            
+            preencherCamposParaAlteracao(p);
+
         } catch (IllegalArgumentException iAE) {
+            limpaCampos();
             jTAConsole.setText(iAE.getMessage());
         }
 
-        limpaCampos();
     }//GEN-LAST:event_jBPesquisaActionPerformed
 
     /**
