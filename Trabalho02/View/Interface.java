@@ -649,17 +649,21 @@ public class Interface extends javax.swing.JFrame {
             return;
         }
 
-        try {
-            pessoasController.excluirPessoa(pessoaASerExcluida.getCpf());
-            desabilitarCamposDeAlteracao();
-            limpaCampos();
-            jBAltera.setEnabled(false);
-        } catch (IOException ex) {
-            jTAConsole.setText("Falha ao excluir pessoa!");
-        }
+        int resposta = criaAviso("Deseja realmente excluir pessoa de CPF " + pessoaASerExcluida.getCpf() + "?", opcoesAviso);
 
-        jCBPessoas.removeItem(pessoaASerExcluida);
-        jTAConsole.setText("Pessoa " + pessoaASerExcluida + " excluida com sucesso!");
+        if (resposta == 0) {
+            try {
+                pessoasController.excluirPessoa(pessoaASerExcluida.getCpf());
+                desabilitarCamposDeAlteracao();
+                limpaCampos();
+                jBAltera.setEnabled(false);
+            } catch (IOException ex) {
+                jTAConsole.setText("Falha ao excluir pessoa!");
+            }
+
+            jCBPessoas.removeItem(pessoaASerExcluida);
+            jTAConsole.setText("Pessoa " + pessoaASerExcluida + " excluida com sucesso!");
+        }
     }//GEN-LAST:event_jBExcluiPessoaActionPerformed
 
     private void jBSalvaAlteracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvaAlteracaoActionPerformed
