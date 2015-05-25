@@ -315,7 +315,7 @@ public class Interface extends javax.swing.JFrame {
         jTFEmailResultadoPesquisa.setEditable(false);
         jTFEmailResultadoPesquisa.setBackground(new java.awt.Color(210, 210, 210));
 
-        jBSalvaAlteracao.setText("Salvar Alterações");
+        jBSalvaAlteracao.setText("Salvar alterações");
         jBSalvaAlteracao.setEnabled(false);
         jBSalvaAlteracao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -323,7 +323,7 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jBAltera.setText("Alterar Dados");
+        jBAltera.setText("Alterar dados");
         jBAltera.setEnabled(false);
         jBAltera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,7 +331,7 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jBExcluiPessoa.setText("Excluir Pessoa");
+        jBExcluiPessoa.setText("Excluir pessoa");
         jBExcluiPessoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBExcluiPessoaActionPerformed(evt);
@@ -535,14 +535,14 @@ public class Interface extends javax.swing.JFrame {
 
         jTabbedPane4.addTab("Pesquisa", jPanel3);
 
-        jBExibeRegistro.setText("Exibir Registro");
+        jBExibeRegistro.setText("Exibir todos os registros");
         jBExibeRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBExibeRegistroActionPerformed(evt);
             }
         });
 
-        jBExcluiRegistro.setText("Excluir Registros");
+        jBExcluiRegistro.setText("Excluir registros");
         jBExcluiRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBExcluiRegistroActionPerformed(evt);

@@ -444,7 +444,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jBSalvaAlteracao">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Salvar Altera&#xe7;&#xf5;es"/>
+                    <Property name="text" type="java.lang.String" value="Salvar altera&#xe7;&#xf5;es"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
@@ -453,7 +453,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jBAltera">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Alterar Dados"/>
+                    <Property name="text" type="java.lang.String" value="Alterar dados"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
@@ -462,7 +462,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jBExcluiPessoa">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Excluir Pessoa"/>
+                    <Property name="text" type="java.lang.String" value="Excluir pessoa"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBExcluiPessoaActionPerformed"/>
@@ -673,7 +673,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="jBExibeRegistro">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Exibir Registro"/>
+        <Property name="text" type="java.lang.String" value="Exibir todos os registros"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBExibeRegistroActionPerformed"/>
@@ -681,7 +681,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jBExcluiRegistro">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Excluir Registros"/>
+        <Property name="text" type="java.lang.String" value="Excluir registros"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBExcluiRegistroActionPerformed"/>
