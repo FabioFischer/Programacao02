@@ -1,5 +1,13 @@
 package Model;
 
+/**
+ *  FURB - BCC - 3° Semestre
+ *  Trabalho de Programação II
+ * 
+ *  Alunos:     Fábio Luiz Fischer;
+                Matheus Felipe Klauberg             
+ */
+
 public class Pessoa implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;

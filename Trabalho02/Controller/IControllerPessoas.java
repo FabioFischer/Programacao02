@@ -4,6 +4,14 @@ import Model.Pessoa;
 import java.io.IOException;
 import java.util.Collection;
 
+/**
+ *  FURB - BCC - 3° Semestre
+ *  Trabalho de Programação II
+ * 
+ *  Alunos:     Fábio Luiz Fischer;
+                Matheus Felipe Klauberg             
+ */
+
 public interface IControllerPessoas {
 
     Pessoa incluirPessoa(String nome, String email, String cpf, String rg) throws IOException;

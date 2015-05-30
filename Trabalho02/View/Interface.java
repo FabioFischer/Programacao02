@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package View;
 
 import Controller.Controle;
@@ -17,14 +13,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
- *
- * @author usuario
+ *  FURB - BCC - 3° Semestre
+ *  Trabalho de Programação II
+ * 
+ *  Alunos:     Fábio Luiz Fischer;
+                Matheus Felipe Klauberg             
  */
+
 public class Interface extends javax.swing.JFrame {
 
-    /**
-     * Creates new form UI
-     */
     private final IControllerPessoas pessoasController;
 
     private String cpf, nome, email, rg;
@@ -101,7 +98,7 @@ public class Interface extends javax.swing.JFrame {
         jBSalvaAlteracao.setEnabled(false);
     }
 
-    private void habilitaCamposDeAlteracao() {
+    private void habilitarCamposDeAlteracao() {
         habilitaCampo(jTFNomeResultadoPesquisa);
         habilitaCampo(jTFCPFResultadoPesquisa);
         habilitaCampo(jTFRGResultadoPesquisa);
@@ -315,7 +312,7 @@ public class Interface extends javax.swing.JFrame {
         jTFEmailResultadoPesquisa.setEditable(false);
         jTFEmailResultadoPesquisa.setBackground(new java.awt.Color(210, 210, 210));
 
-        jBSalvaAlteracao.setText("Salvar Alterações");
+        jBSalvaAlteracao.setText("Salvar alterações");
         jBSalvaAlteracao.setEnabled(false);
         jBSalvaAlteracao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -323,7 +320,7 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jBAltera.setText("Alterar Dados");
+        jBAltera.setText("Alterar dados");
         jBAltera.setEnabled(false);
         jBAltera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -331,7 +328,7 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jBExcluiPessoa.setText("Excluir Pessoa");
+        jBExcluiPessoa.setText("Excluir pessoa");
         jBExcluiPessoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBExcluiPessoaActionPerformed(evt);
@@ -535,14 +532,14 @@ public class Interface extends javax.swing.JFrame {
 
         jTabbedPane4.addTab("Pesquisa", jPanel3);
 
-        jBExibeRegistro.setText("Exibir Registro");
+        jBExibeRegistro.setText("Exibir todos os registros");
         jBExibeRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBExibeRegistroActionPerformed(evt);
             }
         });
 
-        jBExcluiRegistro.setText("Excluir Registros");
+        jBExcluiRegistro.setText("Excluir registros");
         jBExcluiRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBExcluiRegistroActionPerformed(evt);
@@ -649,17 +646,21 @@ public class Interface extends javax.swing.JFrame {
             return;
         }
 
-        try {
-            pessoasController.excluirPessoa(pessoaASerExcluida.getCpf());
-            desabilitarCamposDeAlteracao();
-            limpaCampos();
-            jBAltera.setEnabled(false);
-        } catch (IOException ex) {
-            jTAConsole.setText("Falha ao excluir pessoa!");
-        }
+        int resposta = criaAviso("Deseja realmente excluir pessoa de CPF " + pessoaASerExcluida.getCpf() + "?", opcoesAviso);
 
-        jCBPessoas.removeItem(pessoaASerExcluida);
-        jTAConsole.setText("Pessoa " + pessoaASerExcluida + " excluida com sucesso!");
+        if (resposta == 0) {
+            try {
+                pessoasController.excluirPessoa(pessoaASerExcluida.getCpf());
+                desabilitarCamposDeAlteracao();
+                limpaCampos();
+                jBAltera.setEnabled(false);
+            } catch (IOException ex) {
+                jTAConsole.setText("Falha ao excluir pessoa!");
+            }
+
+            jCBPessoas.removeItem(pessoaASerExcluida);
+            jTAConsole.setText("Pessoa " + pessoaASerExcluida + " excluida com sucesso!");
+        }
     }//GEN-LAST:event_jBExcluiPessoaActionPerformed
 
     private void jBSalvaAlteracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvaAlteracaoActionPerformed
@@ -697,7 +698,7 @@ public class Interface extends javax.swing.JFrame {
             return;
         }
 
-        habilitaCamposDeAlteracao();
+        habilitarCamposDeAlteracao();
     }//GEN-LAST:event_jBAlteraActionPerformed
 
     private void jCBPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPessoasActionPerformed
@@ -722,17 +723,18 @@ public class Interface extends javax.swing.JFrame {
 
             if (p == null) {
                 jTAConsole.setText("Pessoa não cadastrada!");
-            } else {
-                jBAltera.setEnabled(true);
             }
+
+            limpaCampos();
+
             jCBPessoas.setSelectedItem(p);
-            jCBPessoasActionPerformed(null);
+            preencherCamposParaAlteracao(p);
 
         } catch (IllegalArgumentException iAE) {
+            limpaCampos();
             jTAConsole.setText(iAE.getMessage());
         }
 
-        limpaCampos();
     }//GEN-LAST:event_jBPesquisaActionPerformed
 
     /**

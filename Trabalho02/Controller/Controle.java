@@ -8,6 +8,14 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashMap;
 
+/**
+ *  FURB - BCC - 3° Semestre
+ *  Trabalho 02 de Programação II
+ * 
+ *  Alunos:     Fábio Luiz Fischer;
+                Matheus Felipe Klauberg             
+ */
+
 public class Controle implements IControllerPessoas {
 
     HashMap<String, Pessoa> pessoas;
