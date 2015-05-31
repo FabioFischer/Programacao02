@@ -1,4 +1,3 @@
-
 package View;
 
 import Controller.Controle;
@@ -13,13 +12,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
- *  FURB - BCC - 3° Semestre
- *  Trabalho de Programação II
- * 
- *  Alunos:     Fábio Luiz Fischer;
-                Matheus Felipe Klauberg             
+ * FURB - BCC - 3° Semestre
+ * Trabalho de Programação II
+ *
+ * Alunos: Fábio Luiz Fischer;
+ *         Matheus Felipe Klauberg
  */
-
 public class Interface extends javax.swing.JFrame {
 
     private final IControllerPessoas pessoasController;
@@ -647,7 +645,6 @@ public class Interface extends javax.swing.JFrame {
         }
 
         int resposta = criaAviso("Deseja realmente excluir pessoa de CPF " + pessoaASerExcluida.getCpf() + "?", opcoesAviso);
-<<<<<<< HEAD
 
         if (resposta == 0) {
             try {
@@ -655,25 +652,13 @@ public class Interface extends javax.swing.JFrame {
                 desabilitarCamposDeAlteracao();
                 limpaCampos();
                 jBAltera.setEnabled(false);
+
+                jCBPessoas.removeItem(pessoaASerExcluida);
+                jTAConsole.setText("Pessoa " + pessoaASerExcluida + " excluida com sucesso!");
             } catch (IOException ex) {
                 jTAConsole.setText("Falha ao excluir pessoa!");
             }
 
-=======
-
-        if (resposta == 0) {
-            try {
-                pessoasController.excluirPessoa(pessoaASerExcluida.getCpf());
-                desabilitarCamposDeAlteracao();
-                limpaCampos();
-                jBAltera.setEnabled(false);
-            } catch (IOException ex) {
-                jTAConsole.setText("Falha ao excluir pessoa!");
-            }
-
->>>>>>> origin/master
-            jCBPessoas.removeItem(pessoaASerExcluida);
-            jTAConsole.setText("Pessoa " + pessoaASerExcluida + " excluida com sucesso!");
         }
     }//GEN-LAST:event_jBExcluiPessoaActionPerformed
 
